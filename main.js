@@ -23,6 +23,7 @@ function showParks(responseJson){
             `<li>
                 <h3>${responseJson.data[i].fullName}</h3>
                 <p>${responseJson.data[i].description}</p>
+                <p>${responseJson.data[i].addresses}</p>
                 <a href="${responseJson.data[i].url}">${responseJson.data[i].url}</a>
             </li>
             `
@@ -30,7 +31,16 @@ function showParks(responseJson){
     }
 }
 
-function getNationalParks(search, maxResults = 10){
+function getNationalParks(search, maxResults = 10) {
+
+    if (maxResults > 10) {
+        maxResults = 10;
+    }
+
+    if (maxResults === ''){
+        maxResults = 1;
+    }
+
     const keys = {
         stateCode: search,
         limit: maxResults,
@@ -49,7 +59,7 @@ function getNationalParks(search, maxResults = 10){
             }
             throw new Error(response.statusText);
         })
-        .then(responseJson => showParks(responseJson))
+        .then(responseJson => showParks(responseJson), $('#js-error-message').empty())
         .catch(err => {
             $('#js-error-message').text(`Something went wrong: ${err.message}`);
         });
@@ -58,8 +68,10 @@ function getNationalParks(search, maxResults = 10){
 function renderForm() {
     $('form').submit(event => {
         event.preventDefault();
+        // $('#js-error-message').empty();
         const search = $('#js-search-term').val();
         const maxResults = $('#js-max-results').val();
+        console.log(maxResults);
         getNationalParks(search, maxResults);
         $('#js-search-term').val('');
         $('#js-max-results').val('');
