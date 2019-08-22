@@ -1,0 +1,42 @@
+.container {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  button, input[type="text"] {
+    padding: 5px;
+  }
+  
+  button:hover {
+    cursor: pointer;
+  }
+  
+  .error-message {
+      color: red;
+  }
+  
+  li {
+      list-style: none;
+  }
+
+  h3 {
+      text-decoration: underline;
+  }
+
+  a {
+      color: blue;
+  }
+
+  a:hover {
+      color: purple;
+      cursor: pointer;
+  }
